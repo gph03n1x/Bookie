@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href='{% static "login.css" %}'>
+
+    <link rel="icon" href='{% static "Images/favicon.ico" %}'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    
+    <title>Login | Sign Up</title>
+</head>
+
+
+<body>
+    <div id="container">
+	<div id="first_row">
+		<img src='{% static "Images/but.png" %}' style="width: 70px;height: 70px" />
+		<h1>EventHub</h1>
+	</div>
+	<div id="second_row">
+            <div id="aboutWebsite">
+                    <ul class="bullets">
+						<li>Socialize with your friends.</li>
+						<li>Organize your events.</li>
+						<li>Print your tickets for free.</li>
+                    </ul>
+            </div>
+            <div id="login_signup">
+                <div id="buttonsloginOrSignup">
+
+					<button class="button" onclick="onClickFunction(event, 'signupContent')" id="signupButton" style="white-space: nowrap">Sign up</button>
+					<button class="button" onclick="onClickFunction(event, 'loginContent')" id="loginButton">Login</button>
+                </div>
+                {% block content %}
+                <div id="signupContent" class="content">
+
+                    <form method="post" action="/accounts/signup/">
+                        {% csrf_token %}<!-- <input autocomplete="off" class="textfields" id="email" type="email" placeholder="Enter e-mail" name="email"> -->
+					<input autocomplete="off" class="textfields" placeholder="Enter username" name="username" maxlength="150" autofocus="" required="" id="id_username" type="text">
+					<input autocomplete="off" class="textfields" placeholder="Enter password" name="password1" required="" id="id_password1" type="password">
+					<input autocomplete="off" class="textfields" placeholder="Re-enter password" name="password2" required="" id="id_password2" type="password">
+					<div id="rememberBox"> <!-- not really functional -->
+						<input type="checkbox" name="remember"><br />I have read and accepted the <a href="terms/terms.html">Terms and Conditions</a>
+					</div>
+					<button class="submitButton">Sign up</button>
+                        </form>
+                </div>
+                <div id="loginContent" class="content">
+
+                        <form method="post" action="/accounts/login/">
+                            {% csrf_token %}
+                            <!-- temporary -->
+                            <input autocomplete="off" class="textfields" placeholder="Enter username" name="username" autofocus="" maxlength="254" required="" id="id_username" type="text">
+                            <input autocomplete="off" class="textfields" placeholder="Enter password" name="password" required="" id="id_password" type="password">
+
+                            <div id="rememberBox"> <!-- not really functional -->
+                                <input type="checkbox" name="remember"><br />Remember me?
+                            </div>
+                            <button class="submitButton">Login</button>
+                        </form>
+
+                </div>
+                {% endblock %}
+            </div>
+	</div>
+    </div>
+    
+    <script>
+		document.getElementById("signupButton").click();		// sets login button clicked by default.
+
+		function onClickFunction(evnt, type) {
+			var i, inputContent, buttons;
+
+			inputContent = document.getElementsByClassName("content");
+			console.log(inputContent);
+			for (i = 0; i < inputContent.length; i++) {
+				inputContent[i].style.display = "none";
+			}
+
+			buttons = document.getElementsByClassName("button");
+			for (i = 0; i < buttons.length; i++) {
+				buttons[i].className = buttons[i].className.replace(" active", "");
+			}
+
+			document.getElementById(type).style.display = "block";
+			evnt.currentTarget.className += " active";
+		}
+		
+    </script>
+</body>
+
+</html>

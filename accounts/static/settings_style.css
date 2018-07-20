@@ -1,0 +1,126 @@
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+header
+{
+	background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(events.jpg);
+	height: 100vh;
+	background-size: cover;
+	background-position: center;
+}
+
+.main-nav
+{
+	float: right;
+	list-style : none;
+	margin-top: 30px;
+}
+
+.main-nav li
+{
+	display: inline-block;
+}
+
+.main-nav li a
+{
+	color: white;
+	text-decoration: none;
+	padding: 5px 20px;
+	font-family: "Roboto", sans-serif;
+	font-size: 15px;
+}
+
+.main-nav li a:hover
+{
+	border: 1px solid orange;
+}
+
+.logo img
+{
+	margin-top: 15px;
+	width: 75px;
+	height: 60;
+	margin-left: 60px;
+}
+
+body
+{
+	font-family: monospace;
+}
+
+.row
+{
+	max-width: 1200px;
+	margin: auto;
+}
+
+.hero
+{
+	position: absolute;
+	width: 1200px;
+	margin-left: 0px;
+	margin-top: 50px;
+}
+
+h1
+{
+	color: #FF8C00;
+	text-transform: uppercase;
+	font-size: 40px;
+	text-align: center;
+	margin-top: 200px;
+}
+
+.button
+{
+	margin-top: 30px;
+	margin-left: 300px;
+
+}
+
+.btn
+{
+	border: 1px solid white;
+	padding: 10px 30px;
+	color: white;
+	text-decoration: none;
+	margin-right: 5px;
+	font-size: 13px;
+	text-transform: uppercase;
+}
+
+.btn-one
+{
+	font-family: "Roboto", sans-serif;
+}
+
+.btn-one:hover
+{
+	background-color: darkorange;
+	transition: all 0.5s ease-in;
+}
+
+.btn-two
+{
+	font-family: "Roboto", sans-serif;
+}
+
+.btn-two:hover
+{
+	background-color: darkorange;
+	transition: all 0.5s ease-in;
+}
+
+.btn-three
+{
+	font-family: "Roboto", sans-serif;
+}
+
+.btn-three:hover
+{
+	background-color: darkorange;
+	transition: all 0.5s ease-in;
+}

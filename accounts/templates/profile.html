@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Profile</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	 {% load static %}
+    <link rel="stylesheet" type="text/css" href='{% static "profile.css" %}'>
+	<link rel="icon" href='{% static "Images/favicon.ico" %}'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<ul>
+		<li><a href="home.html"> <img src="./Images/but.png" alt="Home" width="25" height="25" ></a></li>
+		<li><a href="my_profile.html"><i class="fa fa-user"></i>	My Profile</a></li>
+  		<li><a href="my_events.html"><i class="fa fa-cube"></i>	My Events</a></li>
+  		<li><a href="create_event.html"><i class="fa fa-calendar-plus"></i>	Create Event</a></li>
+  		<li style="float:right"><a class="active" href="#about">Logout</a></li>
+	</ul>
+			
+	{% block content %}
+	<div class="row">
+		<div class="leftcolumn">
+			<div class="card">
+				<img src='{% static "Images/img_avatar.png" %}' alt="Avatar" style="width: 100%">
+				<h1>{{ object.username }}</h1>
+				<p class="txt">@{{ object.username }}</p>
+				<p>Bio</p>
+				<p>Location</p>
+				<p>Website</p>
+				<p>Birthday</p>
+			</div>
+		</div>
+		<div class="middlecolumn">
+
+			<div class="card">
+				<h1>Informations</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+			</div>
+			{{ object.events }}
+			{% for event in events %}
+			<div class="card">
+
+				<h1>{{ event.name }}</h1>
+				<p>{{ event.info }}</p>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="rightcolumn">
+			<div class="card">
+				<h1>Followers</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+
+
+
+</body>
+
+
+</html>

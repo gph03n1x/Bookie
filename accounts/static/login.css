@@ -1,0 +1,251 @@
+html, body {
+    margin: 0;
+    background-color: #1A2B57;
+	/*background-color: #E7ECF0;*/
+    height: 100%;
+    font-size: 16px;
+    font-family: Calibri
+}
+
+@media screen and (min-width: 300px) {
+    #second_row {
+        flex-wrap: wrap;
+        padding-top: 50px;
+    }
+    
+    .bullets {
+        font-size: 20px;
+        margin: 47px 50px 20px;
+    }
+}
+
+@media screen and (min-width: 780px) {
+    #second_row {
+		flex-wrap: wrap;
+        padding-top: 100px;
+    }
+    
+    .bullets {
+        font-size: 25px;
+        margin: 47px 50px 20px;
+    }
+}
+
+h1{
+    font-family: Calibri;
+    font-size: 70px;
+    margin-right: 45%;
+    color: white;
+
+}
+
+
+/*		CONTAINS FIRST ROW AND SECOND ROW		*/
+
+#container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/*		FIRST ROW DIV		*/
+
+#first_row {
+    border-bottom: 1px solid grey;
+    background-color: #1A2B57;
+    text-align: center;
+    box-shadow: 0 0 9px #888;
+    height: 50px;
+    padding: 10px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+
+/*		SECOND ROW DIV		*/
+
+#second_row {
+    display: flex;
+    flex-direction: row;
+	flex-grow: 1;
+    justify-content: space-evenly;
+    /*align-items: flex-start;*/
+    max-height: 80%;
+}
+
+
+
+/*		THREE BULLETS DIV		*/
+
+#aboutWebsite {
+    display: flex;
+    align-items: flex-start;
+    color: white;
+    margin-bottom: 50px;
+}
+
+
+
+/*		LOGIN-SIGN UP DIV		*/
+
+#login_signup {
+    flex-grow: 0;
+    max-width: 300px;
+    min-width: 200px;
+	width: auto;
+    height: auto;
+    text-align: center;
+    overflow: visible;
+    margin-right: 50px;
+    margin-left: 50px;
+    padding-bottom: 25px;
+}
+
+
+
+/*		THREE BULLETS THAT WELCOME CLIENT		*/
+
+.bullets {
+    list-style-type: disc;
+    font-weight: bold;
+    font-family: Roboto;
+    padding-left: 0;
+}
+
+.bullets li {
+    letter-spacing: 2px;
+    line-height: 2em;
+}
+
+
+
+/*		CHOOSE LOGIN OR SIGN UP BUTTONS		*/
+
+#buttonsloginOrSignup {
+    border-bottom: 1px solid #d3d3d3;
+}
+
+#loginButton {
+    float: right;
+    border-top-right-radius: 10px;
+}
+
+#signupButton {
+    border-top-left-radius: 10px;
+}
+
+.button {
+    font-family: "Calibri";
+    color: black;
+    background-color: #fff;
+    padding: 10px;
+    font-size: 20px;
+    border:none;
+    width: 50%;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #d3d3d3;
+}
+
+.button.active {
+    background-color: #808080;
+}
+
+.button::-moz-focus-inner {
+    border: 0;
+}
+
+
+
+/*		FIELDS FOR INPUT		*/
+
+.textfields {
+    background-color: #fff;
+    font-size: 15px;
+    margin: auto;
+    margin-top: 10px;
+    width: 80%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+#username {
+	padding-left: 30px;
+	background-image:url("../Images/icons_in_signup_form/icon-user_thin_convert-512.png");
+	background-repeat:no-repeat;
+	background-position: 3px;
+}
+
+#password {
+	padding-left: 30px;
+	background-image:url("../Images/icons_in_signup_form/icon-lock-512.png");
+	background-repeat:no-repeat;
+	background-position: 3px;
+}
+
+#email {
+	padding-left: 30px;
+	background-image:url("../Images/icons_in_signup_form/icon-email.png");
+	background-repeat:no-repeat;
+	background-position: 3px;
+}
+
+
+
+/*		REMEMBER BOX		*/
+
+#rememberBox {
+    font-family: "Arial";
+    padding: 10px;
+    width: 60%;
+    font-size: 15px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+
+
+/*		CONTENT OF LOGIN OR SIGN UP		*/
+
+.content {
+    box-shadow: 6px 6px 10px #000;
+    background-color: #fff;
+    padding: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+
+
+/*		HIT LOGIN BUTTON OR SIGN UP TO PROCEED		*/
+
+.submitButton {
+	color: black;
+	background-color: white;
+	font-size: 15px;
+	font-weight: bold;
+	font-family: "Arial";
+	margin-top: 5px;
+	margin-bottom: 5px;
+    width: 64%;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid grey;
+}
+
+.submitButton:hover {
+	background-color: #87ceeb;
+	transition: 0.5s;
+	cursor: pointer;
+}
