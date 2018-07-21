@@ -1,0 +1,118 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Bookie</title>
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href='{% static "dist/semantic.min.css" %}'>
+
+        <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src='{% static "dist/semantic.min.js" %}'></script>
+        <script>
+            $('.ui.sticky').sticky({
+                context: '#context'
+            });
+        </script>
+        
+    </head>
+    <body>
+        <div class="ui main menu sticky">
+            <div class="ui text container">
+                <div href="#" class="header item">
+                    <i class="student icon"></i><a href="../index.html">Bookie</a>
+                </div>
+                
+                <div class="right item">
+                    <div class="ui action input">
+                        <input placeholder="Navigate to..." type="text">
+                        <div class="ui button">Go</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ui left fixed pointing vertical menu">
+            <a class="blue item" href="login.html">Σύνδεση</a>
+            <a class="green item" href="register.html">Εγγραφή</a>
+            <a class="teal item" href="../index.html">Ταξινόμηση ανά</a>
+            <a class="brown item" href="contact.html">Εποικοινωνία</a>
+        </div>   
+        
+        
+        <div class="ui text container">
+            <div class="ui two column doubling stackable grid container">
+                <div class="column">
+                    <div class="ui card">
+                        <div class="image">
+                            <img src="/media/{{ book.cover_image }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui segment">
+                        <p><i class="browser icon"></i>{{ book.ISBN }}</p>
+                        <p><i class="home icon"></i>{{ book.pages }}</p>
+                        <p><i class="phone icon"></i>{{ book.author }}</p>
+                        <p><i class="phone icon"></i>{{ book.price }} $</p>
+
+                    </div>
+                </div>
+            </div><br>
+            <div class="ui segment"><p>{{ book.description }}</p>
+            </div><br>
+                <div class="ui comments">
+                <h3 class="ui dividing header">Comments</h3>
+                <div class="comment">
+                    <div class="content">
+                        <a class="author">BillyTheKid</a>
+                        <div class="metadata">
+                            <span class="date">Today at 4:44PM</span>
+                            <div class="ui star rating" data-rating="0"></div>
+                        </div>
+                        <div class="text">
+                            Δεν έχουν καλή αντιμετώπιση στον πελάτη,
+παράγγειλα μια βάση τηλεόρασης με βραχίωνα, μου ήρθε απλή τοίχου μίλησα με το κατάστημα και μου είπαν να παραγγείλω μια άλλη γιατί ήταν λάθος του συστήματος και να στείλω πίσω την λάθος, παραγγέλνω μια άλλη και μετά από 3 μέρες παίρνω τηλέφωνο και μου λένε ότι δεν υπάρχει αυτή που παράγγειλα.
+και στο τέλος μου την είπαν γιατί είχε πάει 21:00 και δεν με είχαν πάρει τηλ αυτοί που μου είχαν πει!!!!!
+                        </div>
+                    </div>
+                </div>
+                <div class="comment">
+                    <div class="content">
+                        <a class="author">Connor</a>
+                        <div class="metadata">
+                            <span class="date">Today at 10:78AM</span>
+                            <div class="ui star rating" data-rating="4"></div>
+                        </div>
+                        <div class="text">
+                            Aγορασα ενα ταμπλετ asus! το μαγαζι το ειχε στην καλυτερη τιμη της αγορας και ασφαλη αποστολή απο Πατρα σε Κυκλάδες μεσα σε μια μερα!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ui negative floating message">
+                Συνδεθείτε για να κάνετε σχόλιο
+            </div>
+        </div>
+        <br>
+
+        <div class="ui black inverted vertical footer segment">
+            <div class="ui center aligned container">
+                <div class="ui horizontal inverted small divided link list">
+                    <a class="item" href="#">Site Map</a>
+                    <button class="ui facebook button">
+                        <i class="facebook icon"></i>Facebook
+                    </button>
+                    <button class="ui twitter button">
+                        <i class="twitter icon"></i>Twitter
+                    </button>
+                    <button class="ui google plus button">
+                        <i class="google plus icon"></i>Google Plus
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('.rating').rating();
+        </script>
+    </body>
+</html>

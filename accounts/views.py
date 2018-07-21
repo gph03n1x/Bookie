@@ -27,7 +27,7 @@ def signup(request):
             return redirect('index')
     else:
         form = UserCreationForm()
-    return render(request, 'registration/login.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 
 
@@ -43,7 +43,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
             user = User.objects.get(pk=self.request.user.id)
         else:
             user = User.objects.get(pk=self.kwargs.get('pk'))
-        context['events'] = Event.objects.filter(organiser=user)
+        # context['events'] = Event.objects.filter(organiser=user)
         return context
 
     def get_object(self, *args, **kwargs):
