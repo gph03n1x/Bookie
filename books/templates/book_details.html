@@ -50,11 +50,15 @@
                 <div class="column">
                     <div class="ui segment">
                         <p><i class="browser icon"></i>{{ book.ISBN }}</p>
-                        <p><i class="home icon"></i>{{ book.pages }}</p>
-                        <p><i class="phone icon"></i>{{ book.author }}</p>
-                        <p><i class="phone icon"></i>{{ book.price }} $</p>
+                        <p><i class="book icon"></i>{{ book.pages }} Pages</p>
+                        <p><i class="tag icon"></i>{{ book.author }}</p>
+                        <p><i class="euro sign icon"></i>{{ book.price }}</p>
 
                     </div>
+                    <form action="/book/{{ book.pk }}/cart/" method="post">
+                        {% csrf_token %}
+                        <button class="ui button">Add to cart</button>
+                    </form>
                 </div>
             </div><br>
             <div class="ui segment"><p>{{ book.description }}</p>

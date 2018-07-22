@@ -40,117 +40,27 @@
         
         <br>
         <div class="ui text container">
-            <div class="ui four cards">
-                <a class="ui card" href="data/k_actual.html">
-                    <div class="image">
-                      <img src="data/images/actual.png">
-                    </div>
-                <div class="extra">
-                    Actual
-                    <div class="ui section divider"></div>  
-                    Rating:
-                    <div class="ui star rating" data-rating="4"></div>
-                </div>
-                </a>
-                <a class="ui card" href="data/k_afasia.html">
-                  <div class="image">
-                    <img src="data/images/afasia.png">
-                  </div>
-                  <div class="extra">
-                    Αφασία
-                    <div class="ui section divider"></div>    
-                    Rating:
-                    <div class="ui star rating" data-rating="2"></div>
-                  </div>
-                </a>
-                <a class="ui card" href="data/k_afoigeorgiou.html">
-                  <div class="image">
-                    <img src="data/images/afoigeorgiou.png">
-                  </div>
-                  <div class="extra">
-                    Αφοί Γεωργίου
-                    <div class="ui section divider"></div>    
-                    Rating:
-                    <div class="ui star rating" data-rating="4"></div>
-                  </div>
-                </a>
-                <a class="ui card" href="data/k_afoisaranti.html">
-                  <div class="image">
-                    <img src="data/images/afoisaranti.png">
-                  </div>
-                  <div class="extra">
-                    Αφοί Σαράντη
-                    <div class="ui section divider"></div>    
-                    Rating:
-                    <div class="ui star rating" data-rating="0"></div>
-                  </div>
-                </a>
-                <a class="ui card" href="data/k_agiosvlasitis.html">
-                    <div class="image">
-                        <img src="data/images/agiovlasitis.png">
-                    </div>
-                    <div class="extra">
-                        Αγιοβλασίτης
-                        <div class="ui section divider"></div>    
-                        Rating:
-                        <div class="ui star rating" data-rating="3"></div>
-                    </div>
-                </a>
-              
-                <a class="ui card" href="data/k_agora.html">
-                    <div class="image">
-                        <img src="data/images/agora.png">
-                    </div>
-                    <div class="extra">
-                        Αgora
-                        <div class="ui section divider"></div>    
-                        Rating:
-                        <div class="ui star rating" data-rating="0"></div>
-                    </div>
-                </a>
-                <a class="ui card" href="data/k_agrotis.html">
-                    <div class="image">
-                        <img src="data/images/agrotis.png">
-                    </div>
-                    <div class="extra">
-                        Agrotis
-                        <div class="ui section divider"></div> 
-                        Rating:
-                        <div class="ui star rating" data-rating="0"></div>
-                    </div>
-                </a>
-                <a class="ui card" href="data/k_obey.html">
-                    <div class="image">
-                        <img src="data/images/obey.png">
-                    </div>
-                    <div class="extra">
-                        Agorazeis
-                        <div class="ui section divider"></div> 
+            {% for row in object_list %}
+                <div class="ui four cards">
+                {% for item in row %}
+                   <a class="ui card" href="/book/{{ item.pk }}">
+                        <div class="image">
+                          <img src="/media/{{ item.cover_image }}">
+                        </div>
+                   <div class="extra">
+                        {{ item.name }}
+                        <div class="ui section divider"></div>
                         Rating:
                         <div class="ui star rating" data-rating="4"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        
-        <br>
-        
-        <div class="ui black inverted vertical footer segment">
-            <div class="ui center aligned container">
-                <div class="ui horizontal inverted small divided link list">
-                    <a class="item" href="#">Site Map</a>
-                    <button class="ui facebook button">
-                        <i class="facebook icon"></i>Facebook
-                    </button>
-                    <button class="ui twitter button">
-                        <i class="twitter icon"></i>Twitter
-                    </button>
-                    <button class="ui google plus button">
-                        <i class="google plus icon"></i>Google Plus
-                    </button>
+                   </div></a>
+                {% endfor %}
                 </div>
-            </div>
+            {% endfor %}
         </div>
+
+        <br>
+
+
         <script>
             $('.rating').rating();
         </script>
