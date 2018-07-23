@@ -9,35 +9,29 @@
         <script src='{% static "dist/semantic.min.js" %}'></script>
     </head>
     <body>
-        <div class="ui main menu sticky">
-            <div class="ui text container">
-                <div href="#" class="header item">
-                    <i class="student icon"></i><a href="index.html">Bookie</a>
-                </div>
-                
+        <div class="ui large top sticky menu transition visible">
+            <div class="ui container">
+                <a class="active item" href="/"><i class="student icon"></i>Bookie</a>
+                <a class="item" href="/my/"><i class="book icon"></i>My Books</a>
+                <a class="item" href="/cart/"><i class="shopping cart icon"></i>Cart</a>
                 <div class="right item">
+                {% if request.user.id %}
                     <div class="ui action input">
-                        <input placeholder="Navigate to..." type="text">
-                        <div class="ui button">Go</div>
+                        <a href="/accounts/logout/" class="ui button">Logout</a>
                     </div>
+
+                {% else %}
+                    <div class="ui action input">
+                        <a href="/accounts/login/" class="ui primary button">Log in</a>
+                        <a href="/accounts/signup/" class="ui button">Sign up</a>
+                    </div>
+
+
+                {% endif %}
                 </div>
             </div>
         </div>
-        
-        <div class="ui left fixed pointing vertical menu">
-            <a class="blue item" href="data/login.html">Σύνδεση</a>
-            <a class="green item" href="data/register.html">Εγγραφή</a>
-            <div class="active teal item">
-                <b>Ταξινόμηση ανά</b>
-                <div class="menu">
-                    <a class="item">Πιο δημοφιλή</a>
-                    <a class="item">Κορυφαία βαθμολογία</a>
-                    <a class="item">Πρόσφατα</a>
-                </div>
-            </div> 
-            <a class="brown item" href="data/contact.html">Εποικοινωνία</a>
-        </div>   
-        
+
         <br>
         <div class="ui text container">
             {% for row in object_list %}
@@ -49,9 +43,6 @@
                         </div>
                    <div class="extra">
                         {{ item.name }}
-                        <div class="ui section divider"></div>
-                        Rating:
-                        <div class="ui star rating" data-rating="4"></div>
                    </div></a>
                 {% endfor %}
                 </div>
@@ -59,11 +50,7 @@
         </div>
         
         <br>
-        
 
-        <script>
-            $('.rating').rating();
-        </script>
     </body>
     
 </html>

@@ -145,3 +145,5 @@ REST_FRAMEWORK = {
     },
 
 }
+LOGOUT_REDIRECT_URL = "/accounts/login/"
+LOGIN_REDIRECT_URL = '/'

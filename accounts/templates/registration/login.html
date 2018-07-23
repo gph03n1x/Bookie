@@ -28,6 +28,9 @@
 		        Συνδέσου στο Bookie
 		      </div>
 		    </h2>
+			  <div class="ui red message">
+                  You have been successfully logged out
+              </div>
 		    <form class="ui large form" method="post" action="/accounts/login/">{% csrf_token %}
 		      <div class="ui stacked segment">
 		        <div class="field">
@@ -39,17 +42,17 @@
 				<div class="field">
 		          <div class="ui left icon input">
 		            <i class="lock icon"></i>
-		            <input type="password" name="password1" placeholder="Password">
+		            <input type="password" name="password" placeholder="Password">
 		          </div>
 		        </div>
 		        
 				<input type="submit" value="Σύνδεση" class="ui fluid large teal submit button"/>
-                <div class="ui section divider"></div>  
-                <a class="ui fluid large grey button" href="../index.html">Επιστροφή στην κύρια Ιστοσελίδα</a>  
+                <div class="ui section divider"></div>
+				<a class="ui fluid large grey button" href="/accounts/signup/">Register</a>
+				<div class="ui section divider"></div>
+                <a class="ui fluid large grey button" href="/">Επιστροφή στην κύρια Ιστοσελίδα</a>
+
 		      </div>
-            <! -- <div class="ui negative floating message">
-                Δεν είναι δυνατή η σύνδεση με την βάση δεδομένων για λόγους συντήρησης, παρακαλώ δοκιμάστε ξανά αργότερα
-            </div>  -->
 
 		    </form>
 		  </div>

@@ -1,20 +1,16 @@
-from django.views.generic import DetailView, FormView, ListView, CreateView, DeleteView
+from django.views.generic import DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, reverse
-from django.utils import timezone
-from django.contrib.auth.models import User
 from books.models import Book, UserOrder, BookReview
-from django.shortcuts import render, redirect, get_object_or_404
+from books.forms import ReviewForm
+from django.shortcuts import redirect
 
 
 def split_into_rows(A, n=4):
     return [A[i:i + n] for i in range(0, len(A), n)]
 
 
-class BooksListView(LoginRequiredMixin, ListView):
+class BooksListView(ListView):
     model = Book
     template_name = 'index.html'
     queryset = split_into_rows(Book.objects.all())
@@ -36,13 +32,19 @@ class CartListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         cart_items = UserOrder.objects.filter(user=self.request.user, payed_order=False)
-        books = [item.book for item in cart_items]
-        return books
+        # books = [item.book for item in cart_items]
+        return cart_items
 
 
 class BookDetailView(LoginRequiredMixin, DetailView):
     model = Book
     template_name = 'book_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = BookReview.objects.filter(book=context['book'])
+        context['user_id'] = self.request.user.id
+        return context
 
 
 @login_required
@@ -53,6 +55,15 @@ def add_book_to_cart(request, pk):
     return redirect('cart')
 
 
+@login_required
+def remove_book_from_cart(request, pk):
+    if request.method == 'POST':
+        order = UserOrder.objects.get(pk=pk)
+        if order.user == request.user:
+            order.delete()
+
+        return redirect('cart')
+
 
 @login_required
 def checkout_cart(request):
@@ -62,9 +73,25 @@ def checkout_cart(request):
     return redirect('my')
 
 
-class CreateComment(LoginRequiredMixin, CreateView):
-    model = BookReview
+@login_required
+def create_comment(request, pk):
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.book = Book.objects.get(pk=pk)
+            instance.save()
 
-class DeleteComment(LoginRequiredMixin, DeleteView):
-    model = BookReview
+        return redirect('book_detail', pk=pk)
 
+
+@login_required
+def delete_comment(request, pk):
+    if request.method == 'POST':
+        review = BookReview.objects.get(pk=pk)
+        book_pk = review.book.pk
+        if review.user == request.user:
+            review.delete()
+
+        return redirect('book_detail', pk=book_pk)

@@ -9,64 +9,69 @@
         <script src='{% static "dist/semantic.min.js" %}'></script>
     </head>
     <body>
-        <div class="ui main menu sticky">
-            <div class="ui text container">
-                <div href="#" class="header item">
-                    <i class="student icon"></i><a href="index.html">Bookie</a>
-                </div>
-                
+        <div class="ui large top sticky menu transition visible">
+            <div class="ui container">
+                <a class="active item" href="/"><i class="student icon"></i>Bookie</a>
+                <a class="item" href="/my/"><i class="book icon"></i>My Books</a>
+                <a class="item" href="/cart/"><i class="shopping cart icon"></i>Cart</a>
                 <div class="right item">
-
-
+                {% if request.user.id %}
                     <div class="ui action input">
-                    <form action="/checkout/" method="post">
-                        {% csrf_token %}
-                        <button class="ui button">Checkout</button>
-                    </form></div>
+                        <a href="/accounts/logout/" class="ui button">Logout</a>
+                    </div>
+
+                {% else %}
+                    <div class="ui action input">
+                        <a href="/accounts/login/" class="ui primary button">Log in</a>
+                        <a href="/accounts/signup/" class="ui button">Sign up</a>
+                    </div>
+
+
+                {% endif %}
                 </div>
             </div>
         </div>
         
-        <div class="ui left fixed pointing vertical menu">
-            <a class="blue item" href="data/login.html">Σύνδεση</a>
-            <a class="green item" href="data/register.html">Εγγραφή</a>
-            <div class="active teal item">
-                <b>Ταξινόμηση ανά</b>
-                <div class="menu">
-                    <a class="item">Πιο δημοφιλή</a>
-                    <a class="item">Κορυφαία βαθμολογία</a>
-                    <a class="item">Πρόσφατα</a>
-                </div>
-            </div> 
-            <a class="brown item" href="data/contact.html">Εποικοινωνία</a>
-        </div>   
-        
         <br>
-        <div class="ui text container">
-            {% for item in object_list %}
-                <div class="ui three cards">
 
-               <a class="ui card" href="/book/{{ item.pk }}">
-                    <div class="image">
-                      <img src="/media/{{ item.cover_image }}">
-                    </div>
-               <div class="extra">
-                    {{ item.name }}
-                    <div class="ui section divider"></div>
-                    Rating:
-                    <div class="ui star rating" data-rating="4"></div>
-               </div></a> = {{ item.price }}
+        <div class="ui text container"><div class="ui items">
+            {% for item in object_list %}
+
+              <div class="item">
+                <div class="ui small image">
+                  <img src="/media/{{ item.book.cover_image }}">
                 </div>
+                <div class="content">
+                  <div class="header">{{ item.book.name }}</div>
+                  <div class="meta">
+                    <span class="price"><i class="euro icon"></i> {{ item.book.price }}</span>
+                    <span class="stay">{{item.book.ISBN}}</span>
+                  </div>
+                  <div class="description">
+                    <p>{{ item.book.author }}</p>
+                    <p>{{ item.book.pages }}</p>
+                  </div>
+                </div>
+                  <form action="/order/{{ item.pk }}/delete/" method="post">{% csrf_token %}<button class="circular basic red ui icon button"><i class="close icon"> </i></button>
+                               </form>
+              </div>
             {% endfor %}
+
+            </div>
+
+             <br>
+            <div class="ui right aligned basic segment"><form action="/checkout/" method="post">
+                        {% csrf_token %}
+                        <button class="ui large right labeled green icon button"><i class="right shopping cart icon"></i> Checkout</button>
+                    </form></div>
+
+
+
         </div>
 
-        <br>
 
 
 
-        <script>
-            $('.rating').rating();
-        </script>
     </body>
     
 </html>

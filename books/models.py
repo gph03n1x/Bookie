@@ -25,7 +25,7 @@ class BookReview(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     comment = models.TextField(default="")
-    rating = models.CharField(max_length=20, choices=REVIEW, default="positive")
+    would_recommend = models.BooleanField(default=True)
 
 
 class UserOrder(models.Model):

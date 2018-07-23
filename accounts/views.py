@@ -9,7 +9,7 @@ from books.models import Book
 from django.shortcuts import render, redirect, get_object_or_404
 
 # I've already loaded the necessary classes for my suggestions
-# todo: replace this method with a FormView inheriting class-based view
+# todo: make sure it works :D
 def signup(request):
     """
     Simple signup method validates the data posted, creates an account then authenticates the user.
@@ -18,7 +18,9 @@ def signup(request):
     """
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
+        print(form)
         if form.is_valid():
+            print("ok")
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
