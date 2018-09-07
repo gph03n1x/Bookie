@@ -16,7 +16,11 @@ class Book(models.Model):
     price = models.FloatField(default=0.0)
     ISBN = models.CharField(max_length=256)
     pages = models.IntegerField(default=0)
+    positive_votes = models.IntegerField(default=0)
+    negative_votes = models.IntegerField(default=0)
     cover_image = models.ImageField()
+
+
 
 
 class BookReview(models.Model):
@@ -26,6 +30,9 @@ class BookReview(models.Model):
     modified_date = models.DateTimeField(auto_now=True)
     comment = models.TextField(default="")
     would_recommend = models.BooleanField(default=True)
+
+    class Meta:
+        unique_together = (("user", "book"),)
 
 
 class UserOrder(models.Model):

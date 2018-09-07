@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from books.models import Book, UserOrder, BookReview
 from books.forms import ReviewForm
 from django.shortcuts import redirect
+from django.db.models import F
 
 
 def split_into_rows(A, n=4):
@@ -13,7 +14,7 @@ def split_into_rows(A, n=4):
 class BooksListView(ListView):
     model = Book
     template_name = 'index.html'
-    queryset = split_into_rows(Book.objects.all())
+    queryset = split_into_rows(Book.objects.all().order_by('-id')[:16])
 
 
 class MyBooksListView(LoginRequiredMixin, ListView):
@@ -44,6 +45,18 @@ class BookDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['comments'] = BookReview.objects.filter(book=context['book'])
         context['user_id'] = self.request.user.id
+        v_sum = context['book'].positive_votes + context['book'].negative_votes
+        if v_sum == 0:
+            context['percentage'] = 0
+            context['progress_type'] = 'neutral'
+        elif context['book'].positive_votes >context['book'].negative_votes:
+            context['percentage'] =  100 * context['book'].positive_votes / v_sum
+            context['progress_type'] = 'positive'
+        else:
+            context['percentage'] = 100 * context['book'].negative_votes / v_sum
+            context['progress_type'] = 'negative'
+
+        print(context['percentage'])
         return context
 
 
@@ -81,6 +94,13 @@ def create_comment(request, pk):
             instance = form.save(commit=False)
             instance.user = request.user
             instance.book = Book.objects.get(pk=pk)
+            if instance.would_recommend:
+                print('lul')
+                instance.book.positive_votes = F('positive_votes') + 1
+            else:
+                print('wat')
+                instance.book.negative_votes = F('negative_votes') + 1
+            instance.book.save()
             instance.save()
 
         return redirect('book_detail', pk=pk)
@@ -90,8 +110,15 @@ def create_comment(request, pk):
 def delete_comment(request, pk):
     if request.method == 'POST':
         review = BookReview.objects.get(pk=pk)
+
         book_pk = review.book.pk
+        if review.would_recommend:
+            review.book.positive_votes = F('positive_votes') - 1
+        else:
+            review.book.negative_votes = F('negative_votes') - 1
+
         if review.user == request.user:
+            review.book.save()
             review.delete()
 
         return redirect('book_detail', pk=book_pk)

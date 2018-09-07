@@ -54,6 +54,28 @@
                         <p><i class="book icon"></i>{{ book.pages }} Pages</p>
                         <p><i class="tag icon"></i>{{ book.author }}</p>
                         <p><i class="euro sign icon"></i>{{ book.price }}</p>
+                        <p>
+                            {% if progress_type == 'neutral' %}
+                            <div class="ui progress" data-percent="0" id="votes">
+                                <div class="bar">
+                                <div class="progress"></div>
+                              </div>
+                            </div>
+                            {% elif progress_type == 'positive' %}
+                            <div class="ui progress success" data-percent="{{percentage}}" id="votes">
+                                <div class="bar">
+                                <div class="progress"></div>
+                              </div>
+                            </div>
+                            {% else %}
+                            <div class="ui progress error" data-percent="{{percentage}}" id="votes">
+                                <div class="bar">
+                                <div class="progress"></div>
+                              </div>
+                            </div>
+                            {% endif %}
+
+                        </p>
 
                     </div>
                     <form action="/book/{{ book.pk }}/cart/" method="post">{% csrf_token %}
@@ -87,7 +109,6 @@
 
                     <div class="comment">
                     <div class="content">
-
                         <a class="author">{{ comment.user.username }}</a>
                         <div class="metadata">
                             <span class="date">{{ comment.created_date }}</span>
@@ -140,6 +161,7 @@
                 $('#bn').addClass( "negative" );
                 $('#bp').removeClass("positive" );
             };
+            $('#votes').progress();
         </script>
     </body>
 </html>
